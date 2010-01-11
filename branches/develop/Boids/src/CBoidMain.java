@@ -54,7 +54,8 @@ public class CBoidMain extends JFrame implements GLEventListener,
 	}
 
 	public void display(GLAutoDrawable drawable) {
-
+		
+		scene.update();
 		particleRenderEngine.render();		
 	}
 
