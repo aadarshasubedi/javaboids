@@ -29,5 +29,6 @@ public class CSceneObject implements ISceneObject  {
 		// TODO Auto-generated method stub
 		return 0;
 	}
-
+	
+	public void update() {};
 }

@@ -6,18 +6,42 @@ import Interface.ISceneObject;
 
 public class CBoidObject extends CSceneObject implements ISceneObject {
 
+	//static private float maxSpeed = 10.0f;
+	
 	private float mSpeed = 0.0f;
 	private float mRoll  = 15.0f;
+	
+	private Vector3D heading = new Vector3D();
+	private Vector3D velocity = new Vector3D();	
 
 	private Point3D position = new Point3D(0.0f, 0.0f, 0.0f);
 	
-	public CBoidObject()
+	private CBoidNavigator navigator = null;
+	private CBoidEye       eye       = null;
+	private CBoidPilot     pilot     = null;
+	
+	public CBoidObject(CBoidScene scene)
 	{		
+		initializeBoid(scene);
 	}
 	
-	public CBoidObject(Point3D startPos)
+	public CBoidObject(CBoidScene scene, Point3D startPos)
 	{
 		position = startPos;
+		initializeBoid(scene);
+	}
+	
+	private void initializeBoid(CBoidScene scene)
+	{
+		eye       = new CBoidEye(scene);
+		navigator = new CBoidNavigator(eye);
+		pilot     = new CBoidPilot();
+	}
+	
+	public void update()
+	{	
+		navigator.calculate(this);
+		pilot.evaluate(this);
 	}
 	
 	@Override
@@ -67,5 +91,21 @@ public class CBoidObject extends CSceneObject implements ISceneObject {
 		}
 		
 		return mRoll;
+	}
+
+	public Vector3D getHeading() {
+		return heading;
+	}
+
+	public void setHeading(Vector3D heading) {
+		this.heading = heading;
+	}
+
+	public Vector3D getVelocity() {
+		return velocity;
+	}
+
+	public void setVelocity(Vector3D velocity) {
+		this.velocity = velocity;
 	}
 }
