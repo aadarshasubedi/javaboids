@@ -71,4 +71,15 @@ public class Vector3D {
 	{
 		return new Vector3D();
 	}
+	
+	public double length()
+	{
+		return Math.sqrt((mX*mX)+(mY*mY)+(mZ*mZ));
+	}
+	
+	public Vector3D normalize()
+	{
+		double vecLen = length();		
+		return new Vector3D (mX / vecLen, mY / vecLen, mZ / vecLen);
+	}
 }

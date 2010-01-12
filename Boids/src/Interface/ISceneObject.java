@@ -9,6 +9,7 @@ public interface ISceneObject {
 	public Vector3D getDirection();
 	public float getSpeed();
 	public int   getColor();
-	
+
+	public void calculate();
 	public void update();
 }

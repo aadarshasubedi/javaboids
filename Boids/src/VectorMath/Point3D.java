@@ -36,12 +36,15 @@ public class Point3D {
 	}
 	
 	public Point3D add(Point3D pnt)
+	{	
+		return new Point3D(this.mX + pnt.getX(), 
+				 this.mY + pnt.getY(), 
+				 this.mZ  + pnt.getZ());
+	}
+	
+	public Point3D divide(double divisor)
 	{
-		this.mX = this.mX + pnt.getX();
-		this.mY = this.mY + pnt.getY();
-		this.mZ = this.mZ + pnt.getZ();
-		
-		return this;
+		return new Point3D(mX / divisor, mY / divisor, mZ / divisor);
 	}
 	
 	public double distance(Point3D point)
@@ -53,5 +56,12 @@ public class Point3D {
 		double squaredSum = (xd * xd) + (yd * yd) + (zd * zd);
 		
 		return Math.sqrt(squaredSum);
+	}
+	
+	public Vector3D vector(Point3D pnt2)
+	{
+		return new Vector3D(pnt2.getX() - this.getX(),
+				pnt2.getY() - this.getY(),
+				pnt2.getZ() - this.getZ());
 	}
 }

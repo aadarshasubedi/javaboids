@@ -23,6 +23,10 @@ public class CBoidNavigator {
 	{
 		// Initialize all navigation rules to start values
 		
+		CBoidNavigatorRuleFlockCenter rule = new CBoidNavigatorRuleFlockCenter();
+		rule.init(boid, 1.0);
+		Vector3D centeroftheworld = null;
+		
 		Vector<CSceneObject> interactingObjects = eye.perceive();
 		
 		if (interactingObjects.size() != 0)
@@ -34,14 +38,16 @@ public class CBoidNavigator {
 				CBoidObject subject = (CBoidObject)it.next();
 				
 				// evaluate specific object out of scene against this
-				// boid, by acalling evaluation for each available rule
-				subject.getLocationInScene();
+				// boid, by scaling evaluation for each available rule
+				rule.evaluate(subject);
 			}
+			
+			centeroftheworld = rule.result();
 		}
 		
 		// Get resulting forces from each rule and calculate resulting
 		// vector
 		
-		return new Vector3D();
+		return centeroftheworld;
 	}
 }
