@@ -14,6 +14,7 @@ public class CBoidScene {
 	public CBoidScene() {
 		super();
 	
+		allObjectsInScene.add(new CBoidObject(this, new Point3D(0,0,0)));
 		allObjectsInScene.add(new CBoidObject(this, new Point3D(-2,0,2)));
 		allObjectsInScene.add(new CBoidObject(this, new Point3D(2,0,2)));
 		allObjectsInScene.add(new CBoidObject(this, new Point3D(0,-2,0)));
@@ -32,7 +33,15 @@ public class CBoidScene {
 			
 			while (it.hasNext())
 			{
-				it.next().calculate();
+				CBoidObject obj = (CBoidObject)it.next();
+				obj.calculate();
+				
+				if (obj == allObjectsInScene.firstElement())
+				{
+					Point3D pos = obj.getLocationInScene();					
+					
+					obj.setPositionInScene(new Point3D(pos.getX()+3, pos.getY()+3, pos.getZ()));
+				}
 			}
 		}
 		

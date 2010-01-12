@@ -35,17 +35,17 @@ public class CBoidNavigatorRuleFlockCenter extends CBoidNavigatorRule
 		
 		Point3D boidPos = boid.getLocationInScene();
 		
-		//Vector3D direction = boidPos.vector(mFlockCentroid).normalize();Vector3D direction = boidPos.vector(mFlockCentroid).normalize();
+		//Vector3D direction = boidPos.vector(mFlockCentroid).normalize();
 		Vector3D direction = boidPos.vector(mFlockCentroid);
 		double distance = boidPos.distance(mFlockCentroid);
 		
 		Vector3D forceVector = new Vector3D();
 		
 		if (distance > 0.1)
-		{
-			forceVector = direction.scalarMultiply(1/distance*0.08);
+		{	
+			forceVector = direction.scalarMultiply(1 / distance);
 		}
 		
-		return forceVector.scalarMultiply(1.0);
+		return forceVector.scalarMultiply(0.1);
 	};
 }
