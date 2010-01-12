@@ -14,7 +14,7 @@ public class CBoidObject extends CSceneObject implements ISceneObject {
 	private Vector3D heading = new Vector3D();
 	private Vector3D velocity = new Vector3D();	
 
-	private Point3D position = new Point3D(0.0f, 0.0f, 0.0f);
+	private Point3D position = new Point3D(0.0, 0.0, 0.0);
 	
 	private CBoidNavigator navigator = null;
 	private CBoidEye       eye       = null;
@@ -60,8 +60,8 @@ public class CBoidObject extends CSceneObject implements ISceneObject {
 	public Point3D getLocationInScene() {
 		// TODO Auto-generated method stub
 		
-		position.setX(position.getX() + 0.05f);
-		position.setY(position.getY() + 0.01f);
+		position.setX(position.getX() + 0.05);
+		position.setY(position.getY() + 0.01);
 		
 		return position;
 	}

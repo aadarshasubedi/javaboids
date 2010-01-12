@@ -65,7 +65,7 @@ public class ParticleRenderer {
 		gl.glPushMatrix();
 		
 		TranslateToPosition(boid);
-		TransformBoidSpace(boid);		
+		TransformBoidSpace(boid);
 
 		SetMaterial();
 		DrawBoid();
@@ -76,7 +76,7 @@ public class ParticleRenderer {
 	// Brings particle in position in scene space
 	private void TranslateToPosition(CBoidObject boid) {
 		Point3D point = boid.getLocationInScene();
-		gl.glTranslatef(point.getX(), point.getY(), point.getZ());
+		gl.glTranslated(point.getX(), point.getY(), point.getZ());
 	}
 
 	// Rotates to get local coordinate system setup
