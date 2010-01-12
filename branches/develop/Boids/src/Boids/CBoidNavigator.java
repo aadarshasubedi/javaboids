@@ -21,6 +21,8 @@ public class CBoidNavigator {
 	
 	public Vector3D calculate(CBoidObject boid)
 	{
+		// Initialize all navigation rules to start values
+		
 		Vector<CSceneObject> interactingObjects = eye.perceive();
 		
 		if (interactingObjects.size() != 0)
@@ -30,9 +32,15 @@ public class CBoidNavigator {
 			while (it.hasNext())
 			{
 				CBoidObject subject = (CBoidObject)it.next();
+				
+				// evaluate specific object out of scene against this
+				// boid, by acalling evaluation for each available rule
 				subject.getLocationInScene();
 			}
 		}
+		
+		// Get resulting forces from each rule and calculate resulting
+		// vector
 		
 		return new Vector3D();
 	}
