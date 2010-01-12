@@ -30,7 +30,9 @@ public class CBoidNavigatorRuleFlockCenter extends CBoidNavigatorRule
 	public Vector3D result() 
 	{
 		// Return vector pointing to flock center
-		// Distance influences strength (length) of vector
+		// Distance influences strength directly. Boid wants to get quicker to
+		// center when more far away. This is reflected in the displacement
+		// vector which is larger when the boid is more far away.
 		mFlockCentroid = mFlockCentroid.divide(mEvaluatedNrOfBoids);
 		
 		Point3D boidPos = boid.getLocationInScene();
@@ -43,9 +45,11 @@ public class CBoidNavigatorRuleFlockCenter extends CBoidNavigatorRule
 		
 		if (distance > 0.1)
 		{	
-			forceVector = direction.scalarMultiply(1 / distance);
+			// a value of 1.0 would bring all boids in one step together,
+			// this is not desired so take a percentage of total displacement
+			forceVector = direction.scalarMultiply(0.05); 			
 		}
 		
-		return forceVector.scalarMultiply(0.1);
+		return forceVector.scalarMultiply(1.0);
 	};
 }
