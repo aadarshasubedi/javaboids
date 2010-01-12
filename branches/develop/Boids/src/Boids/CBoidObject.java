@@ -15,6 +15,7 @@ public class CBoidObject extends CSceneObject implements ISceneObject {
 	private Vector3D velocity = new Vector3D();	
 
 	private Point3D position = new Point3D(0.0, 0.0, 0.0);
+	private Point3D updatedPosition = new Point3D(0,0,0);
 	
 	private CBoidNavigator navigator = null;
 	private CBoidEye       eye       = null;
@@ -38,10 +39,21 @@ public class CBoidObject extends CSceneObject implements ISceneObject {
 		pilot     = new CBoidPilot();
 	}
 	
+	public void calculate()
+	{
+		Vector3D result = navigator.calculate(this);
+		
+		Point3D newPos = this.getLocationInScene();
+		newPos = newPos.add(new Point3D(result.getX(), result.getY(), result.getZ()));
+		
+		updatedPosition = newPos;
+		
+		pilot.evaluate(this);
+	}
+	
 	public void update()
 	{	
-		navigator.calculate(this);
-		pilot.evaluate(this);
+		this.setPositionInScene(updatedPosition);
 	}
 	
 	@Override
@@ -59,11 +71,11 @@ public class CBoidObject extends CSceneObject implements ISceneObject {
 	@Override
 	public Point3D getLocationInScene() {
 		// TODO Auto-generated method stub
-		
-		position.setX(position.getX() + 0.05);
-		position.setY(position.getY() + 0.01);
-		
 		return position;
+	}
+	
+	public void setPositionInScene(Point3D pos) {
+		position = pos;
 	}
 
 	@Override

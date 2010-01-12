@@ -6,6 +6,8 @@ import Interface.ISceneObject;
 
 public class CSceneObject implements ISceneObject  {
 
+	public void calculate(){};
+	
 	@Override
 	public int getColor() {
 		// TODO Auto-generated method stub
