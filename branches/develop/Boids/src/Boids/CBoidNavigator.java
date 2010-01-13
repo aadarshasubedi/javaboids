@@ -24,7 +24,7 @@ public class CBoidNavigator {
 		// Initialize all navigation rules to start values
 		
 		CBoidNavigatorRuleFlockCenter rule = new CBoidNavigatorRuleFlockCenter();
-		rule.init(boid, 1.0);
+		rule.init(boid, 0.5);
 		Vector3D centeroftheworld = null;
 		
 		Vector<CSceneObject> interactingObjects = eye.perceive();

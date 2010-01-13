@@ -49,11 +49,13 @@ public class CBoidObject extends CSceneObject implements ISceneObject {
 		updatedPosition = newPos;
 		
 		pilot.evaluate(this);
+		
+		this.setPositionInScene(updatedPosition);
 	}
 	
 	public void update()
 	{	
-		this.setPositionInScene(updatedPosition);
+		//this.setPositionInScene(updatedPosition);
 	}
 	
 	@Override
