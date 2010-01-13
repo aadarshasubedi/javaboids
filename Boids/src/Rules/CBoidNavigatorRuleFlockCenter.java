@@ -44,12 +44,12 @@ public class CBoidNavigatorRuleFlockCenter extends CBoidNavigatorRule
 		Vector3D direction = boidPos.vector(mFlockCentroid);
 		double distance = boidPos.distance(mFlockCentroid);
 		
-		Vector3D forceVector = new Vector3D();
+		Vector3D forceVector = direction;
 		
 		// Only when distance larger then a certain threshold
 		// Flock becomes unstable when distance very small it will shoot out of screen
 		// but with a nice boundary it could give a nice effect (distance = 0)
-		if (distance > 0.5)
+		if (distance > 0.3)
 		{	
 			// a value of 1.0 would bring all boids in one step together,
 			// this is not desired so take a percentage of total displacement
@@ -61,11 +61,16 @@ public class CBoidNavigatorRuleFlockCenter extends CBoidNavigatorRule
 			forceVector = direction.scalarMultiply(1/(distance*distance));
 			
 			// A boid has a max velocity to get somewhere, is limited here (should go to pilot module)
-			double maxVelocit = 3.0; 
+			double maxVelocit = 1.5; 
 			if (forceVector.length() > maxVelocit)
 			{
 				forceVector = forceVector.normalize().scalarMultiply(maxVelocit);
 			}
+		}
+		else
+		{
+			// Do not move close than 0.5 distance
+			forceVector = new Vector3D();
 		}
 		
 		return forceVector.scalarMultiply(mWeightFactor);
