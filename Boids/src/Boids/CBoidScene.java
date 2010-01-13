@@ -40,7 +40,7 @@ public class CBoidScene {
 				{
 					Point3D pos = obj.getLocationInScene();					
 					
-					obj.setPositionInScene(new Point3D(pos.getX()+3, pos.getY()+3, pos.getZ()));
+					//obj.setPositionInScene(new Point3D(pos.getX()+0.5, pos.getY()+0.5, pos.getZ()));
 				}
 			}
 		}

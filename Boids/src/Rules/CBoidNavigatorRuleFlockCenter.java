@@ -23,8 +23,11 @@ public class CBoidNavigatorRuleFlockCenter extends CBoidNavigatorRule
 	
 	public void evaluate(CBoidObject object)
 	{
-		mEvaluatedNrOfBoids++;
-		mFlockCentroid = mFlockCentroid.add(object.getLocationInScene());
+		if (boid != object)
+		{
+			mEvaluatedNrOfBoids++;
+			mFlockCentroid = mFlockCentroid.add(object.getLocationInScene());
+		}
 	}
 	
 	public Vector3D result() 
@@ -43,13 +46,28 @@ public class CBoidNavigatorRuleFlockCenter extends CBoidNavigatorRule
 		
 		Vector3D forceVector = new Vector3D();
 		
-		if (distance > 0.1)
+		// Only when distance larger then a certain threshold
+		// Flock becomes unstable when distance very small it will shoot out of screen
+		// but with a nice boundary it could give a nice effect (distance = 0)
+		if (distance > 0.5)
 		{	
 			// a value of 1.0 would bring all boids in one step together,
 			// this is not desired so take a percentage of total displacement
-			forceVector = direction.scalarMultiply(0.05); 			
+			
+			// When the birds are very far away, the urge to go to the group 
+			// might be smaller (they cannot see them) than the resulting velocity 
+			// factor might indicate. (distance 100 makes a very large velocity vector,
+			// but can the boid actually see those members?)
+			forceVector = direction.scalarMultiply(1/(distance*distance));
+			
+			// A boid has a max velocity to get somewhere, is limited here (should go to pilot module)
+			double maxVelocit = 3.0; 
+			if (forceVector.length() > maxVelocit)
+			{
+				forceVector = forceVector.normalize().scalarMultiply(maxVelocit);
+			}
 		}
 		
-		return forceVector.scalarMultiply(1.0);
+		return forceVector.scalarMultiply(mWeightFactor);
 	};
 }
