@@ -23,9 +23,13 @@ public class CBoidNavigator {
 	{
 		// Initialize all navigation rules to start values
 		
-		CBoidNavigatorRuleFlockCenter rule = new CBoidNavigatorRuleFlockCenter();
-		rule.init(boid, 0.5);
-		Vector3D centeroftheworld = null;
+		//CBoidNavigatorRuleFlockCenter rule1 = new CBoidNavigatorRuleFlockCenter();
+		CBoidNavigatorRuleKeepDistance rule2 = new CBoidNavigatorRuleKeepDistance();
+		
+		//rule1.init(boid, 1.0);
+		rule2.init(boid, 1.0);
+		
+		Vector3D desiredDirection = null;
 		
 		Vector<CSceneObject> interactingObjects = eye.perceive();
 		
@@ -39,15 +43,37 @@ public class CBoidNavigator {
 				
 				// evaluate specific object out of scene against this
 				// boid, by scaling evaluation for each available rule
-				rule.evaluate(subject);
+				//rule1.evaluate(subject);
+				rule2.evaluate(subject);
 			}
+
+			double x = 10;
+			double y = -10;
+			double z = -16;
 			
-			centeroftheworld = rule.result();
+			double rnd = (Math.random()-1)*2;
+			Vector3D desireToGoToSceneCenter = boid.getLocationInScene().vector(
+					new Point3D(x, y, z));
+			
+			Vector3D rule = new Vector3D();//rule1.result();
+			desiredDirection = rule.add(rule2.result());//.add(desireToGoToSceneCenter);
+			//desiredDirection = rule1.result();
+			
+			System.out.print("(" + rule.getX() + ","
+					+ rule.getY() + ","
+					+ rule.getZ() + ")\n");
+			
+			// A boid has a max velocity to get somewhere, is limited here (should go to pilot module)
+			double maxVelocit = 0.5; 
+			if (desiredDirection.length() > maxVelocit)
+			{
+				desiredDirection = desiredDirection.normalize().scalarMultiply(maxVelocit);
+			}
 		}
 		
 		// Get resulting forces from each rule and calculate resulting
 		// vector
 		
-		return centeroftheworld;
+		return desiredDirection;
 	}
 }

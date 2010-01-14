@@ -14,12 +14,15 @@ public class CBoidScene {
 	public CBoidScene() {
 		super();
 	
-		allObjectsInScene.add(new CBoidObject(this, new Point3D(0,0,0)));
-		allObjectsInScene.add(new CBoidObject(this, new Point3D(-2,0,2)));
-		allObjectsInScene.add(new CBoidObject(this, new Point3D(2,0,2)));
-		allObjectsInScene.add(new CBoidObject(this, new Point3D(0,-2,0)));
-		allObjectsInScene.add(new CBoidObject(this, new Point3D(0,2,0)));
-		allObjectsInScene.add(new CBoidObject(this, new Point3D(0,1,0)));
+		//allObjectsInScene.add(new CBoidObject(this, new Point3D(0,0,0)));
+		for (int i = 0; i < 10; ++i)
+		{
+			allObjectsInScene.add(new CBoidObject(this, new Point3D((Math.random()-1)*3.0,(Math.random()-1)*3.0,0)));
+			allObjectsInScene.add(new CBoidObject(this, new Point3D(1,(Math.random()-1)*3.0,0)));
+			allObjectsInScene.add(new CBoidObject(this, new Point3D(0,-1,0)));
+			allObjectsInScene.add(new CBoidObject(this, new Point3D((Math.random()-1)*3.0,1,0)));
+		}
+		//allObjectsInScene.add(new CBoidObject(this, new Point3D(0,1,0)));
 	}
 	
 	public void update()
@@ -36,12 +39,20 @@ public class CBoidScene {
 				CBoidObject obj = (CBoidObject)it.next();
 				obj.calculate();
 				
-				if (obj == allObjectsInScene.firstElement())
-				{
-					Point3D pos = obj.getLocationInScene();					
+//				if (obj == allObjectsInScene.firstElement())
+//				{
+					if (obj == allObjectsInScene.get(0))
+					{
+						Point3D pos = obj.getLocationInScene();		
+					    obj.setPositionInScene(new Point3D(pos.getX()-0.2, pos.getY(), pos.getZ()));
+					}
 					
-					//obj.setPositionInScene(new Point3D(pos.getX()+0.5, pos.getY()+0.5, pos.getZ()));
-				}
+					if (obj == allObjectsInScene.get(1))
+					{
+						Point3D pos = obj.getLocationInScene();		
+					//	obj.setPositionInScene(new Point3D(pos.getX()+0.2, pos.getY(), pos.getZ()));
+					}
+				//}
 			}
 		}
 		

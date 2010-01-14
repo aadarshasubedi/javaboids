@@ -154,11 +154,11 @@ public class ParticleRenderer {
 		
 		gl.glMatrixMode(GL.GL_PROJECTION);
 		gl.glLoadIdentity();
-		glu.gluPerspective(45.0, 1.0, 1.0, 50.0);
+		glu.gluPerspective(65.0, 1.0, 1.0, 50.0);
 
 		
 		// if (otherPos == 0) {
-		glu.gluLookAt(4.5, 0.5, 6.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
+		glu.gluLookAt(0, 0, 15.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
 		// }
 		// else if (otherPos == 1)
 		// {
