@@ -13,7 +13,7 @@ public class CBoidNavigatorRule implements IBoidNavigatorRule {
 	}
 
 	@Override
-	public void init(CBoidObject actor, int weightFactor) {
+	public void init(CBoidObject actor, double  weightFactor) {
 		// TODO Auto-generated method stub
 
 	}
