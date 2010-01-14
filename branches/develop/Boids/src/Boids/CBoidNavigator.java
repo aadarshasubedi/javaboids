@@ -23,11 +23,11 @@ public class CBoidNavigator {
 	{
 		// Initialize all navigation rules to start values
 		
-		//CBoidNavigatorRuleFlockCenter rule1 = new CBoidNavigatorRuleFlockCenter();
-		CBoidNavigatorRuleKeepDistance rule2 = new CBoidNavigatorRuleKeepDistance();
+		CBoidNavigatorRuleFlockCenter rule1 = new CBoidNavigatorRuleFlockCenter();
+		//CBoidNavigatorRuleKeepDistance rule2 = new CBoidNavigatorRuleKeepDistance();
 		
-		//rule1.init(boid, 1.0);
-		rule2.init(boid, 1.0);
+		rule1.init(boid, 1.0);
+		//rule2.init(boid, 1.0);
 		
 		Vector3D desiredDirection = null;
 		
@@ -43,8 +43,8 @@ public class CBoidNavigator {
 				
 				// evaluate specific object out of scene against this
 				// boid, by scaling evaluation for each available rule
-				//rule1.evaluate(subject);
-				rule2.evaluate(subject);
+				rule1.evaluate(subject);
+			//	rule2.evaluate(subject);
 			}
 
 			double x = 10;
@@ -56,12 +56,12 @@ public class CBoidNavigator {
 					new Point3D(x, y, z));
 			
 			Vector3D rule = new Vector3D();//rule1.result();
-			desiredDirection = rule.add(rule2.result());//.add(desireToGoToSceneCenter);
-			//desiredDirection = rule1.result();
+			//desiredDirection = rule.add(rule2.result());//.add(desireToGoToSceneCenter);
+			desiredDirection = rule1.result();
 			
-			System.out.print("(" + rule.getX() + ","
-					+ rule.getY() + ","
-					+ rule.getZ() + ")\n");
+			System.out.print("(" + desiredDirection.getX() + ","
+					+ desiredDirection.getY() + ","
+					+ desiredDirection.getZ() + ")\n");
 			
 			// A boid has a max velocity to get somewhere, is limited here (should go to pilot module)
 			double maxVelocit = 0.5; 
