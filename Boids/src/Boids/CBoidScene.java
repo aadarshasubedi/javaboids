@@ -23,9 +23,9 @@ public class CBoidScene {
 //			allObjectsInScene.add(new CBoidObject(this, new Point3D((Math.random()-1)*10.0,1,0)));
 //		}
 		
-		allObjectsInScene.add(new CBoidObject(this, new Point3D(8,0,0)));
-		allObjectsInScene.add(new CBoidObject(this, new Point3D(0,8,0)));
-		allObjectsInScene.add(new CBoidObject(this, new Point3D(0,0,8)));
+		allObjectsInScene.add(new CBoidObject(this, new Point3D(2,2,0)));
+		allObjectsInScene.add(new CBoidObject(this, new Point3D(8,8,0)));
+		allObjectsInScene.add(new CBoidObject(this, new Point3D(4,4,0)));
 		allObjectsInScene.add(new CBoidObject(this, new Point3D(0,0,0)));
 		
 		//allObjectsInScene.add(new CBoidObject(this, new Point3D(0,1,0)));
@@ -68,7 +68,7 @@ public class CBoidScene {
 			
 			while (it.hasNext())
 			{
-				it.next().update();
+				it.next().update(0);
 			}
 		}
 	}

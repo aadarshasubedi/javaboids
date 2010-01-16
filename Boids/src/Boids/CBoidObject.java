@@ -6,15 +6,21 @@ import Interface.ISceneObject;
 
 public class CBoidObject extends CSceneObject implements ISceneObject {
 
-	//static private float maxSpeed = 10.0f;
+	private double maxSpeed = 10;
+	private double maxAcceleration = 0;
 	
-	private float mSpeed = 0.0f;
-	private float mRoll  = 15.0f;
+	private double mAccel = 0;
+	private double mSpeed = 0;
+	private double mRoll  = 15;
 	
-	private Vector3D heading = new Vector3D();
-	private Vector3D velocity = new Vector3D();	
+	private double mLastTime = 0;
+	
+	private Vector3D heading  = new Vector3D();		// Direction boid flies to
+	private Vector3D velocity = new Vector3D();		// Resulting vector of heading and speed
+	
+	private Vector3D requestedAccel = new Vector3D(); // Acceleration desired by navigator module
 
-	private Point3D position = new Point3D(0.0, 0.0, 0.0);
+	private Point3D position = new Point3D(0, 0, 0);
 	private Point3D updatedPosition = new Point3D(0,0,0);
 	
 	private CBoidNavigator navigator = null;
@@ -34,28 +40,25 @@ public class CBoidObject extends CSceneObject implements ISceneObject {
 	
 	private void initializeBoid(CBoidScene scene)
 	{
-		eye       = new CBoidEye(scene);
+		eye       = new CBoidEye(this, scene);
 		navigator = new CBoidNavigator(eye);
 		pilot     = new CBoidPilot();
 	}
 	
 	public void calculate()
 	{
-		Vector3D result = navigator.calculate(this);
-		
-		Point3D newPos = this.getLocationInScene();
-		newPos = newPos.add(new Point3D(result.getX(), result.getY(), result.getZ()));
-		
-		updatedPosition = newPos;
-		
-		pilot.evaluate(this);
-		
-		this.setPositionInScene(updatedPosition);
+		requestedAccel = navigator.calculate(this);			
+		//pilot.evaluate(this);
+				
 	}
 	
-	public void update()
+	public void update(double time)
 	{	
-		//this.setPositionInScene(updatedPosition);
+		// Let pilot module calculate new positions based on time delta
+		Point3D newPos = pilot.evaluate(this, time - mLastTime);
+		setPositionInScene(newPos);
+		
+		mLastTime = time;
 	}
 	
 	@Override
@@ -81,27 +84,27 @@ public class CBoidObject extends CSceneObject implements ISceneObject {
 	}
 
 	@Override
-	public float getSpeed() {
+	public double getSpeed() {
 		return mSpeed;
 	}
 
-	public void setSpeed(float speed) {
+	public void setSpeed(double speed) {
 		mSpeed = speed;
 	}
 
-	public float getPitch() {
-		return 0.0f;
+	public double getPitch() {
+		return 0;
 	}
 
-	public float getRoll() {
+	public double getRoll() {
 		
-		if (mRoll == 15.0f)
+		if (mRoll == 15)
 		{
-			mRoll = -15.0f;
+			mRoll = -15;
 		}
 		else 
 		{ 
-			mRoll = 15.0f; 
+			mRoll = 15; 
 		}
 		
 		return mRoll;
@@ -121,5 +124,9 @@ public class CBoidObject extends CSceneObject implements ISceneObject {
 
 	public void setVelocity(Vector3D velocity) {
 		this.velocity = velocity;
+	}
+
+	public Vector3D getRequestedAccel() {
+		return requestedAccel;
 	}
 }

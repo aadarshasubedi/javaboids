@@ -7,9 +7,9 @@ public interface ISceneObject {
 
 	public Point3D getLocationInScene();	
 	public Vector3D getDirection();
-	public float getSpeed();
+	public double getSpeed();
 	public int   getColor();
 
 	public void calculate();
-	public void update();
+	public void update(double deltaTime);
 }
