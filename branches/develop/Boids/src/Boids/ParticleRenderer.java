@@ -82,13 +82,13 @@ public class ParticleRenderer {
 	// Rotates to get local coordinate system setup
 	private void TransformBoidSpace(CBoidObject boid) {
 		// Rotate around z, to requested pitch
-		gl.glRotatef(boid.getPitch(), 1.0f, 0.0f, 0.0f);
+		gl.glRotated(boid.getPitch(), 1.0f, 0.0f, 0.0f);
 
 		// rotate around y, to requested (not defined)
-		gl.glRotatef(0.0f, 0.0f, 1.0f, 0.0f);
+		gl.glRotated(0.0f, 0.0f, 1.0f, 0.0f);
 
 		// rotate round x, to requested roll
-		gl.glRotatef(boid.getRoll(), 1.0f, 0.0f, 0.0f);
+		gl.glRotated(boid.getRoll(), 1.0f, 0.0f, 0.0f);
 	}
 
 	// Draw the boid as a simple triangle
@@ -154,11 +154,11 @@ public class ParticleRenderer {
 		
 		gl.glMatrixMode(GL.GL_PROJECTION);
 		gl.glLoadIdentity();
-		glu.gluPerspective(65.0, 1.0, 1.0, 50.0);
+		glu.gluPerspective(35.0, 1.0, 1.0, 50.0);
 
 		
 		// if (otherPos == 0) {
-		glu.gluLookAt(0, 0, 15.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
+		glu.gluLookAt(0, 0, 30.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
 		// }
 		// else if (otherPos == 1)
 		// {

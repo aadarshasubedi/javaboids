@@ -70,6 +70,10 @@ public class CBoidNavigator {
 				desiredDirection = desiredDirection.normalize().scalarMultiply(maxVelocit);
 			}
 		}
+		else
+		{
+			desiredDirection = new Vector3D(0,0,0);
+		}
 		
 		// Get resulting forces from each rule and calculate resulting
 		// vector

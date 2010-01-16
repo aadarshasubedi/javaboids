@@ -27,10 +27,10 @@ public class CSceneObject implements ISceneObject  {
 	}
 
 	@Override
-	public float getSpeed() {
+	public double getSpeed() {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 	
-	public void update() {};
+	public void update(double time) {};
 }
