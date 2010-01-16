@@ -7,60 +7,67 @@ import Interface.ISceneObject;
 public class CBoidObject extends CSceneObject implements ISceneObject {
 
 	private double maxSpeed = 10;
-	private double maxAcceleration = 0;
-	
+	private double maxAcceleration = 10;
+
 	private double mAccel = 0;
-	private double mSpeed = 0;
-	private double mRoll  = 15;
-	
+	private double mSpeed = 0.8;
+	private double mRoll = 15;
+
 	private double mLastTime = 0;
-	
-	private Vector3D heading  = new Vector3D();		// Direction boid flies to
-	private Vector3D velocity = new Vector3D();		// Resulting vector of heading and speed
-	
-	private Vector3D requestedAccel = new Vector3D(); // Acceleration desired by navigator module
+
+	private Vector3D heading = new Vector3D(-1, 0, 0); // Direction boid flies
+														// to
+	private Vector3D velocity = new Vector3D(); // Resulting vector of heading
+												// and speed
+
+	private Vector3D requestedAccel = new Vector3D(); // Acceleration desired
+														// by navigator module
 
 	private Point3D position = new Point3D(0, 0, 0);
-	private Point3D updatedPosition = new Point3D(0,0,0);
-	
+	private Point3D updatedPosition = new Point3D(0, 0, 0);
+
 	private CBoidNavigator navigator = null;
-	private CBoidEye       eye       = null;
-	private CBoidPilot     pilot     = null;
-	
-	public CBoidObject(CBoidScene scene)
-	{		
+	private CBoidEye eye = null;
+	private CBoidPilot pilot = null;
+
+	public CBoidObject(CBoidScene scene) {
 		initializeBoid(scene);
 	}
-	
-	public CBoidObject(CBoidScene scene, Point3D startPos)
-	{
+
+	public CBoidObject(CBoidScene scene, Point3D startPos) {
 		position = startPos;
 		initializeBoid(scene);
+
+		velocity = new Vector3D(mSpeed, mSpeed, mSpeed);
+		velocity.multiply(heading);
 	}
-	
-	private void initializeBoid(CBoidScene scene)
-	{
-		eye       = new CBoidEye(this, scene);
+
+	private void initializeBoid(CBoidScene scene) {
+		eye = new CBoidEye(this, scene);
 		navigator = new CBoidNavigator(eye);
-		pilot     = new CBoidPilot();
+		pilot = new CBoidPilot();
+
+		mLastTime = System.currentTimeMillis();
 	}
-	
-	public void calculate()
-	{
-		requestedAccel = navigator.calculate(this);			
-		//pilot.evaluate(this);
-				
+
+	public void calculate() {
+		// Let navigation module calculate desired acceleration in scene
+		requestedAccel = navigator.calculate(this).scalarMultiply(maxAcceleration);
+		// pilot.evaluate(this);
+
 	}
-	
-	public void update(double time)
-	{	
+
+	public void update(double time) {
 		// Let pilot module calculate new positions based on time delta
-		Point3D newPos = pilot.evaluate(this, time - mLastTime);
+		Point3D newPos = pilot.evaluate(this, (time - mLastTime) * 0.001);
 		setPositionInScene(newPos);
-		
+
+		System.out.print("newPos = (" + newPos.getX() + "," + newPos.getY()
+				+ "," + newPos.getZ() + ")\n");
+
 		mLastTime = time;
 	}
-	
+
 	@Override
 	public int getColor() {
 		// TODO Auto-generated method stub
@@ -78,7 +85,7 @@ public class CBoidObject extends CSceneObject implements ISceneObject {
 		// TODO Auto-generated method stub
 		return position;
 	}
-	
+
 	public void setPositionInScene(Point3D pos) {
 		position = pos;
 	}
@@ -97,16 +104,13 @@ public class CBoidObject extends CSceneObject implements ISceneObject {
 	}
 
 	public double getRoll() {
-		
-		if (mRoll == 15)
-		{
+
+		if (mRoll == 15) {
 			mRoll = -15;
+		} else {
+			mRoll = 15;
 		}
-		else 
-		{ 
-			mRoll = 15; 
-		}
-		
+
 		return mRoll;
 	}
 

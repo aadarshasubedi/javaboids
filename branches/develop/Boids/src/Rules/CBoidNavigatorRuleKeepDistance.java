@@ -44,7 +44,7 @@ public class CBoidNavigatorRuleKeepDistance extends CBoidNavigatorRule  {
 
 	@Override
 	public Vector3D result() {		
-		return mResultVector.scalarMultiply(mWeightFactor*0.01);
+		return mResultVector.scalarMultiply(mWeightFactor);
 	}
 
 }

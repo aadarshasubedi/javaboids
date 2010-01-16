@@ -19,7 +19,7 @@ public class CBoidEye {
 		// TODO: Create a sphere with the boid's position as center. Then check which objects
 		//       are in the sphere (the sight range of the boid)
 		
-		double MAX_SEEING_DISTANCE = 8;
+		double MAX_SEEING_DISTANCE = 16;
 		
 		Vector<CSceneObject> boidsInTheWorld = theWorldISee.getSceneObjects();
 		Vector<CSceneObject> boidsISee = new Vector<CSceneObject>();
