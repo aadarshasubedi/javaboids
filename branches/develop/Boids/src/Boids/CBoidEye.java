@@ -6,20 +6,20 @@ public class CBoidEye {
 	
 	private CBoidScene theWorldISee = null;
 	private CBoidObject theBoid = null;
+	private double MAX_SEEING_DISTANCE = 0;
 	
 	public CBoidEye(CBoidObject me, CBoidScene scene)
 	{	
 		this.theWorldISee = scene;
 		this.theBoid = me;
+		
+		// Not every boid has the same vision
+		this.MAX_SEEING_DISTANCE = 6 + Math.random() * 4; 
 	}
 	
 	public Vector<CSceneObject> perceive()
 	{
 		// The boid that sees all (starting simple for now)
-		// TODO: Create a sphere with the boid's position as center. Then check which objects
-		//       are in the sphere (the sight range of the boid)
-		
-		double MAX_SEEING_DISTANCE = 16;
 		
 		Vector<CSceneObject> boidsInTheWorld = theWorldISee.getSceneObjects();
 		Vector<CSceneObject> boidsISee = new Vector<CSceneObject>();
