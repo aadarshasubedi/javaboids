@@ -51,7 +51,7 @@ public class CBoidNavigatorRuleFlockCenter extends CBoidNavigatorRule
 	//	if (distance > 5.0)
 		{
 			forceVector = direction;
-			forceVector = direction.scalarMultiply(0.1);
+			forceVector = direction.scalarMultiply(0.2);
 		}
 		
 		//System.out.print("Going to Center: "); forceVector.print();

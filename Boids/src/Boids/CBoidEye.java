@@ -14,7 +14,7 @@ public class CBoidEye {
 		this.theBoid = me;
 		
 		// Not every boid has the same vision
-		this.MAX_SEEING_DISTANCE = 6 + Math.random() * 4; 
+		this.MAX_SEEING_DISTANCE = 10 + Math.random() * 4; 
 	}
 	
 	public Vector<CSceneObject> perceive()
