@@ -9,6 +9,7 @@ import javax.media.opengl.glu.GLU;
 import com.sun.opengl.util.GLUT;
 
 import VectorMath.Point3D;
+import VectorMath.Vector3D;
 
 /**
  * @author pbeer
@@ -82,40 +83,53 @@ public class ParticleRenderer {
 	// Rotates to get local coordinate system setup
 	private void TransformBoidSpace(CBoidObject boid) {
 		// Rotate around z, to requested pitch
-		gl.glRotated(boid.getPitch(), 1.0f, 0.0f, 0.0f);
+		Vector3D x_axis = new Vector3D(1,0,0);
+		Vector3D xdisp = new Point3D(0,0,0).vector(new Point3D(boid.getHeading().getX(), 0, 0));
+		double angle_x = Math.acos(xdisp.dotProduct(x_axis));
+		
+		//gl.glRotated(boid.getPitch(), 1.0f, 0.0f, 0.0f);
+		gl.glRotated(angle_x, 1.0f, 0.0f, 0.0f);
 
+		Vector3D y_axis = new Vector3D(0,1,0);
+		Vector3D ydisp = new Point3D(0,0,0).vector(new Point3D(0, boid.getHeading().getY(), 0));
+		double angle_y = Math.acos(ydisp.dotProduct(y_axis));
 		// rotate around y, to requested (not defined)
-		gl.glRotated(0.0f, 0.0f, 1.0f, 0.0f);
+		gl.glRotated(angle_y, 0.0f, 1.0f, 0.0f);
 
 		// rotate round x, to requested roll
-		gl.glRotated(boid.getRoll(), 1.0f, 0.0f, 0.0f);
+		//gl.glRotated(25.0f, 1.0f, 0.0f, 0.0f);
 	}
 
 	// Draw the boid as a simple triangle
 	private void DrawBoid() {
+		
+		gl.glPushMatrix();		
 		gl.glColor3f(1.0f,0.0f,0.0f);
-		glut.glutSolidCube(0.25f);
+		//glut.glutSolidCube(0.25f);
+		gl.glRotatef(90.0f, 0, 1, 0);
+		glut.glutSolidCone(0.25f, 1.0f, 10, 10);
+		gl.glPopMatrix();
 		
-		gl.glBegin(GL.GL_TRIANGLES);
-		
-		gl.glColor3f(1.0f, 0.0f, 0.0f);
-		gl.glVertex3f(-0.50f, 0.0f, -0.50f);
-		gl.glColor3f(0.0f, 0.0f, 1.0f);
-		gl.glVertex3f(0.50f, 0.0f, -0.50f);
-		gl.glColor3f(0.0f, 1.0f, 0.0f);
-		gl.glVertex3f(0.0f, 0.0f, 0.0f);
-		
-		gl.glColor3f(1.0f, 0.0f, 0.0f);
-		gl.glVertex3f(-0.50f, 0.0f, 0.50f);
-		gl.glColor3f(0.0f, 0.0f, 1.0f);
-		gl.glVertex3f(0.50f, 0.0f, 0.50f);
-		gl.glColor3f(0.0f, 1.0f, 0.0f);
-		gl.glVertex3f(0.0f, 0.0f, 0.0f);
-		
-		gl.glEnd();
+//		gl.glBegin(GL.GL_TRIANGLES);
+//		
+//		gl.glColor3f(1.0f, 0.0f, 0.0f);
+//		gl.glVertex3f(-0.50f, 0.0f, -0.50f);
+//		gl.glColor3f(0.0f, 0.0f, 1.0f);
+//		gl.glVertex3f(0.50f, 0.0f, -0.50f);
+//		gl.glColor3f(0.0f, 1.0f, 0.0f);
+//		gl.glVertex3f(0.0f, 0.0f, 0.0f);
+//		
+//		gl.glColor3f(1.0f, 0.0f, 0.0f);
+//		gl.glVertex3f(-0.50f, 0.0f, 0.50f);
+//		gl.glColor3f(0.0f, 0.0f, 1.0f);
+//		gl.glVertex3f(0.50f, 0.0f, 0.50f);
+//		gl.glColor3f(0.0f, 1.0f, 0.0f);
+//		gl.glVertex3f(0.0f, 0.0f, 0.0f);
+//		
+//		gl.glEnd();
 		
 		gl.glColor3f(1.0f,0.0f,0.0f);
-		glut.glutSolidCube(0.25f);
+		//glut.glutSolidCube(0.25f);
 	}
 
 	protected void SetMaterial() {
@@ -158,7 +172,7 @@ public class ParticleRenderer {
 
 		
 		// if (otherPos == 0) {
-		glu.gluLookAt(0, 0, 20.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
+		glu.gluLookAt(0, 0, 8.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
 		// }
 		// else if (otherPos == 1)
 		// {
