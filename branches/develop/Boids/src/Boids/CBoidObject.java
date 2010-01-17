@@ -6,15 +6,15 @@ import Interface.ISceneObject;
 
 public class CBoidObject extends CSceneObject implements ISceneObject {
 
-	private double maxAcceleration = 10;
+	private double maxAcceleration = 20;
 
 	private double mAccel = 0;
-	private double mSpeed = 3;
+	private double mSpeed = 25;
 	private double mRoll = 15;
 
 	private double mLastTime = 0;
 
-	private Vector3D heading = new Vector3D(-1, 0, 0); // Direction boid flies
+	private Vector3D heading = new Vector3D(-0.5, 0, 0.5); // Direction boid flies
 														// to
 	private Vector3D velocity = new Vector3D(); // Resulting vector of heading
 												// and speed
@@ -37,7 +37,10 @@ public class CBoidObject extends CSceneObject implements ISceneObject {
 		position = startPos;
 		initializeBoid(scene);
 
-		velocity = new Vector3D(mSpeed, mSpeed, mSpeed);
+		velocity = new Vector3D(heading.getX() * mSpeed, 
+				heading.getY() * mSpeed, 
+				heading.getZ() * mSpeed);
+		
 		velocity.multiply(heading);
 	}
 
@@ -52,6 +55,7 @@ public class CBoidObject extends CSceneObject implements ISceneObject {
 	public void calculate() {
 		// Let navigation module calculate desired acceleration in scene
 		requestedAccel = navigator.calculate(this).scalarMultiply(maxAcceleration);
+		requestedAccel.print();
 		// pilot.evaluate(this);
 
 	}
@@ -60,10 +64,6 @@ public class CBoidObject extends CSceneObject implements ISceneObject {
 		// Let pilot module calculate new positions based on time delta
 		Point3D newPos = pilot.evaluate(this, (time - mLastTime) * 0.001);
 		setPositionInScene(newPos);
-
-		System.out.print("newPos = (" + newPos.getX() + "," + newPos.getY()
-				+ "," + newPos.getZ() + ")\n");
-
 		mLastTime = time;
 	}
 
