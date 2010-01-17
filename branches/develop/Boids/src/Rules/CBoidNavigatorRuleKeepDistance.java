@@ -20,7 +20,7 @@ public class CBoidNavigatorRuleKeepDistance extends CBoidNavigatorRule  {
 
 			double distance = mBoid.getLocationInScene().distance(object.getLocationInScene());
 
-			if (distance < 3.0)
+			if (distance < 2.0)
 			{
 				Vector3D oppositeVector = 
 					mBoid.getLocationInScene().vector(object.getLocationInScene()).scalarMultiply(-1.0);
