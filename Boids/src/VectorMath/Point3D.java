@@ -64,4 +64,11 @@ public class Point3D {
 				pnt2.getY() - this.getY(),
 				pnt2.getZ() - this.getZ());
 	}
+	
+	public void print()
+	{
+		System.out.print("(" + this.getX() + ","
+				+ this.getY() + ","
+				+ this.getZ() + ")\n");
+	}
 }

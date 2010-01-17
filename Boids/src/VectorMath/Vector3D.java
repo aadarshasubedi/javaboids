@@ -48,39 +48,31 @@ public class Vector3D {
 	}	
 	
 	public Vector3D add(Vector3D obj)
-	{
-		this.mX = this.mX + obj.mX;
-		this.mY = this.mY + obj.mY;
-		this.mZ = this.mZ + obj.mZ;
-		
-		return new Vector3D(this);
+	{	
+		return new Vector3D(this.mX + obj.mX,
+				this.mY + obj.mY,
+				this.mZ + obj.mZ);
 	}
 	
 	public Vector3D subtract(Vector3D obj)
 	{
-		this.mX = this.mX - obj.mX;
-		this.mY = this.mY - obj.mY;
-		this.mZ = this.mZ - obj.mZ;
-		
-		return new Vector3D(this);
+		return new Vector3D(this.mX - obj.mX,
+				this.mY - obj.mY,
+				this.mZ - obj.mZ);
 	}
 	
 	public Vector3D scalarMultiply(double scalar)
 	{
-		this.mX = this.mX * scalar;
-		this.mY = this.mY * scalar;
-		this.mZ = this.mZ * scalar;
-		
-		return new Vector3D(this);
+		return new Vector3D(this.mX * scalar,
+				this.mY * scalar,
+				this.mZ * scalar);
 	}
 	
 	public Vector3D multiply(Vector3D obj)
 	{
-		this.mX = this.mX * obj.mX;
-		this.mY = this.mY * obj.mY;
-		this.mZ = this.mZ * obj.mZ;
-		
-		return new Vector3D(this);
+		return new Vector3D(this.mX * obj.mX,
+				this.mY * obj.mY,
+				this.mZ * obj.mZ);
 	}
 	
 	public Vector3D dotProduct(Vector3D obj)
@@ -102,5 +94,12 @@ public class Vector3D {
 		this.mZ = this.mZ / vecLen;
 		
 		return new Vector3D (this);
+	}
+	
+	public void print()
+	{
+		System.out.print("(" + this.getX() + ","
+				+ this.getY() + ","
+				+ this.getZ() + ")\n");
 	}
 }

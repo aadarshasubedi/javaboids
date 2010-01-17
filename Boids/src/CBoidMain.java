@@ -1,7 +1,6 @@
 import Boids.CBoidScene;
 import Boids.ParticleRenderer;
 
-
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
@@ -18,20 +17,20 @@ import javax.swing.JFrame;
 import com.sun.opengl.util.FPSAnimator;
 import com.sun.opengl.util.GLUT;
 
-public class CBoidMain extends JFrame implements GLEventListener,
-		KeyListener, MouseListener {
+public class CBoidMain extends JFrame implements GLEventListener, KeyListener,
+		MouseListener {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	static private CBoidScene scene = new CBoidScene();
 	static private ParticleRenderer particleRenderEngine = new ParticleRenderer();
 
 	public static void main(String[] args) {
 		new CBoidMain().run();
 	}
-	
+
 	private FPSAnimator anim = null;
 	private GLU glu;
 	private GLUT glut;
@@ -39,8 +38,7 @@ public class CBoidMain extends JFrame implements GLEventListener,
 	private GLCanvas canvas;
 
 	private GL gl = null;
-	
-	
+
 	public CBoidMain() {
 		super("Java Boids");
 
@@ -54,9 +52,9 @@ public class CBoidMain extends JFrame implements GLEventListener,
 	}
 
 	public void display(GLAutoDrawable drawable) {
-		
+
 		scene.update();
-		particleRenderEngine.render();		
+		particleRenderEngine.render();
 	}
 
 	public void displayChanged(GLAutoDrawable drawable, boolean modeChanged,
@@ -76,67 +74,67 @@ public class CBoidMain extends JFrame implements GLEventListener,
 
 		gl.glEnable(GL.GL_DEPTH_TEST);
 		gl.glDisable(GL.GL_CULL_FACE);
-	
+
 		particleRenderEngine.setGLContext(gl, glu, glut);
 		particleRenderEngine.setScene(scene);
-		
+
 		// Create the Animator and start it
-		anim = new FPSAnimator(drawable, 15);
+		anim = new FPSAnimator(drawable, 30);
 		anim.start();
 	}
 
 	public void keyPressed(KeyEvent key) {
 
 		switch (key.getKeyCode()) {
-		
+
 		// Toggle Camera position
-//		case KeyEvent.VK_C: {
-//			
-//			if (otherPos < 2)
-//			{
-//				otherPos ++;
-//			}
-//			else
-//			{
-//				otherPos = 0;
-//			}
-//		}
-//			break;
-//			
-//		// Rotate complete scene
-//		case KeyEvent.VK_S: {
-//			sceneRotation = !sceneRotation;
-//		}
-//		break;
-//		
-//		case KeyEvent.VK_T:
-//		{
-//			moveTail = !moveTail;
-//		}
-//		break;
-//		
-//		//Toggle head step rotation
-//		case KeyEvent.VK_H: {			
-//			headRotation = !headRotation;
-//		}
-//		break;
-//		
-//		// Toggle head animated rotation
-//		case KeyEvent.VK_A: {			
-//			animate = !animate;
-//		}
-//		break;
-//		
-//		case KeyEvent.VK_K: {
-//			kneelDown = !kneelDown;
-//		}
-//		break;
-//				
-//		// Rotate light source through scene
-//		case KeyEvent.VK_L: {
-//			lightRotate = !lightRotate;
-//		}
-//		break;
+		// case KeyEvent.VK_C: {
+		//			
+		// if (otherPos < 2)
+		// {
+		// otherPos ++;
+		// }
+		// else
+		// {
+		// otherPos = 0;
+		// }
+		// }
+		// break;
+		//			
+		// // Rotate complete scene
+		// case KeyEvent.VK_S: {
+		// sceneRotation = !sceneRotation;
+		// }
+		// break;
+		//		
+		// case KeyEvent.VK_T:
+		// {
+		// moveTail = !moveTail;
+		// }
+		// break;
+		//		
+		// //Toggle head step rotation
+		// case KeyEvent.VK_H: {
+		// headRotation = !headRotation;
+		// }
+		// break;
+		//		
+		// // Toggle head animated rotation
+		// case KeyEvent.VK_A: {
+		// animate = !animate;
+		// }
+		// break;
+		//		
+		// case KeyEvent.VK_K: {
+		// kneelDown = !kneelDown;
+		// }
+		// break;
+		//				
+		// // Rotate light source through scene
+		// case KeyEvent.VK_L: {
+		// lightRotate = !lightRotate;
+		// }
+		// break;
 
 		case KeyEvent.VK_ESCAPE:
 			System.exit(0);
@@ -147,7 +145,7 @@ public class CBoidMain extends JFrame implements GLEventListener,
 		}
 	}
 
- 	public void keyReleased(KeyEvent key) {
+	public void keyReleased(KeyEvent key) {
 	}
 
 	public void keyTyped(KeyEvent key) {
@@ -186,5 +184,5 @@ public class CBoidMain extends JFrame implements GLEventListener,
 		setVisible(true);
 		canvas.requestFocusInWindow();
 	}
-	
-	}
+
+}
