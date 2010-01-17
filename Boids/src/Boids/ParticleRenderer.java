@@ -158,7 +158,7 @@ public class ParticleRenderer {
 
 		
 		// if (otherPos == 0) {
-		glu.gluLookAt(0, 0, 30.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
+		glu.gluLookAt(0, 0, 35.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
 		// }
 		// else if (otherPos == 1)
 		// {

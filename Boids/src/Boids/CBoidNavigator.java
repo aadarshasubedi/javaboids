@@ -53,12 +53,12 @@ public class CBoidNavigator {
 //			
 //			double rnd = (Math.random()-1)*2;
 //			Vector3D desireToGoToSceneCenter = boid.getLocationInScene().vector(
-//					new Point3D(x, y, z));
+//			/		new Point3D(x, y, z));
 //			
 //			Vector3D rule = new Vector3D();//rule1.result();
 			desiredDirection = rule1.result().add(rule2.result());//.add(desireToGoToSceneCenter);
 			
-			//desiredDirection = rule2.result();
+			//desiredDirection = rule1.result();
 			
 //			System.out.print("(" + desiredDirection.getX() + ","
 //					+ desiredDirection.getY() + ","
