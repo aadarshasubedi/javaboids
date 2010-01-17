@@ -6,11 +6,10 @@ import Interface.ISceneObject;
 
 public class CBoidObject extends CSceneObject implements ISceneObject {
 
-	private double maxSpeed = 10;
 	private double maxAcceleration = 10;
 
 	private double mAccel = 0;
-	private double mSpeed = 0.8;
+	private double mSpeed = 3;
 	private double mRoll = 15;
 
 	private double mLastTime = 0;
