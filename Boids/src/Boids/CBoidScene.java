@@ -15,7 +15,7 @@ public class CBoidScene {
 		super();
 	
 		//allObjectsInScene.add(new CBoidObject(this, new Point3D(0,0,0)));
-		for (int i = 0; i < 5; ++i)
+		for (int i = 0; i < 20; ++i)
 		{
 		allObjectsInScene.add(new CBoidObject(this, new Point3D((Math.random()-1)*10.0,(Math.random()-1)*10.0,0)));
 		allObjectsInScene.add(new CBoidObject(this, new Point3D(1,(Math.random()-1)*10.0,0)));

@@ -79,7 +79,7 @@ public class CBoidMain extends JFrame implements GLEventListener, KeyListener,
 		particleRenderEngine.setScene(scene);
 
 		// Create the Animator and start it
-		anim = new FPSAnimator(drawable, 30);
+		anim = new FPSAnimator(drawable, 15);
 		anim.start();
 	}
 

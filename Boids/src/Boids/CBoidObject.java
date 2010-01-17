@@ -6,10 +6,10 @@ import Interface.ISceneObject;
 
 public class CBoidObject extends CSceneObject implements ISceneObject {
 
-	private double maxAcceleration = 20;
+	private double maxAcceleration = 12;
 
 	private double mAccel = 0;
-	private double mSpeed = 25;
+	private double mSpeed = 5;
 	private double mRoll = 15;
 
 	private double mLastTime = 0;
@@ -55,7 +55,7 @@ public class CBoidObject extends CSceneObject implements ISceneObject {
 	public void calculate() {
 		// Let navigation module calculate desired acceleration in scene
 		requestedAccel = navigator.calculate(this).scalarMultiply(maxAcceleration);
-		requestedAccel.print();
+		//requestedAccel.print();
 		// pilot.evaluate(this);
 
 	}

@@ -10,7 +10,7 @@ public class CBoidPilot {
 		//System.out.print("Navigator request: "); desiredDirection.print();
 		
 		Vector3D velocityVect = new Vector3D(boid.getVelocity());
-		System.out.print("Actual velocity: "); velocityVect.print();
+		//System.out.print("Actual velocity: "); velocityVect.print();
 		
 		// Calculated displacement based on d = v*t + 0.5at^2
 		Vector3D accelPart = desiredDirection.scalarMultiply(0.5*deltaTime*deltaTime);
@@ -24,13 +24,13 @@ public class CBoidPilot {
 		{
 			velocityVect = velocityVect.normalize().scalarMultiply(maxSpeed);
 		}
-		System.out.print("New velocity: "); velocityVect.print();
+		//System.out.print("New velocity: "); velocityVect.print();
 		
 		boid.setVelocity(velocityVect);
 				
 		Point3D newPos = boid.getLocationInScene();		
 		newPos = newPos.add(new Point3D(displacement.getX(),displacement.getY(),displacement.getZ()));
-		System.out.print("New position: "); newPos.print();
+		//System.out.print("New position: "); newPos.print();
 		
 		return newPos;
 	};
