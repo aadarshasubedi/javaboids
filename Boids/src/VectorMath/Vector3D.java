@@ -54,6 +54,7 @@ public class Vector3D {
 				this.mZ + obj.mZ);
 	}
 	
+	
 	public Vector3D subtract(Vector3D obj)
 	{
 		return new Vector3D(this.mX - obj.mX,
@@ -75,9 +76,20 @@ public class Vector3D {
 				this.mZ * obj.mZ);
 	}
 	
-	public Vector3D dotProduct(Vector3D obj)
+	public double dotProduct(Vector3D obj)
 	{
-		return new Vector3D();
+		return (obj.getX()*this.getX() +
+				obj.getY()*this.getY() +
+				obj.getZ()*this.getZ() );
+	}
+	
+	public Vector3D crossProduct(Vector3D obj)
+	{
+		return new Vector3D(
+				this.getY() * obj.getZ() - obj.getY() * this.getZ(),
+				this.getZ() * obj.getX() - obj.getZ() * this.getX(),
+				this.getX() * obj.getY() - obj.getX() * this.getY()
+				);
 	}
 	
 	public double length()
@@ -89,9 +101,12 @@ public class Vector3D {
 	{
 		double vecLen = length();	
 		
-		this.mX = this.mX / vecLen;
-		this.mY = this.mY / vecLen;
-		this.mZ = this.mZ / vecLen;
+		if (vecLen > 0)
+		{
+			this.mX = this.mX / vecLen;
+			this.mY = this.mY / vecLen;
+			this.mZ = this.mZ / vecLen;
+		}
 		
 		return new Vector3D (this);
 	}

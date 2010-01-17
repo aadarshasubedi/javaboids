@@ -42,8 +42,8 @@ public class CBoidNavigator {
 				// evaluate specific object out of scene against this
 				// boid, by scaling evaluation for each available rule				
 				rule1.evaluate(subject);
-				rule2.evaluate(subject);
-				rule3.evaluate(subject);
+				//rule2.evaluate(subject);
+				//rule3.evaluate(subject);
 			}
 
 			// Get resulting forces from each rule and calculate resulting
