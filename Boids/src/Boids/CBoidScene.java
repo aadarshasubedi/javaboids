@@ -18,22 +18,22 @@ public class CBoidScene {
 		super();
 
 		// allObjectsInScene.add(new CBoidObject(this, new Point3D(0,0,0)));
-//		for (int i = 0; i < 5; ++i) {
-//			allObjectsInScene.add(new CBoidObject(this, new Point3D((Math
-//					.random() - 1) * 10.0, (Math.random() - 1) * 10.0, 0)));
-//			allObjectsInScene.add(new CBoidObject(this, new Point3D(1, (Math
-//					.random() - 1) * 10.0, 0)));
-//			allObjectsInScene.add(new CBoidObject(this, new Point3D(0, -1, 0)));
-//			allObjectsInScene.add(new CBoidObject(this, new Point3D((Math
-//					.random() - 1) * 10.0, 1, 0)));
-//		}
+		for (int i = 0; i < 1; ++i) {
+			allObjectsInScene.add(new CBoidObject(this, new Point3D((Math
+					.random() - 1) * 10.0, (Math.random() - 1) * 10.0, 0)));
+			allObjectsInScene.add(new CBoidObject(this, new Point3D(1, (Math
+					.random() - 1) * 10.0, 0)));
+			allObjectsInScene.add(new CBoidObject(this, new Point3D(0, -1, 0)));
+			allObjectsInScene.add(new CBoidObject(this, new Point3D((Math
+					.random() - 1) * 10.0, 1, 0)));
+		}
 
 //		CBoidObject bd = new CBoidObject(this, new Point3D(-4, 0, 0));
 //		bd.setHeading(new Vector3D(1, 1, 1));
 //
 //		allObjectsInScene.add(bd);
 		// allObjectsInScene.add(new CBoidObject(this, new Point3D(8,8,0)));
-		 allObjectsInScene.add(new CBoidObject(this, new Point3D(4, 0, 0)));
+		 allObjectsInScene.add(new CBoidObject(this, new Point3D(0, 0, 4)));
 		allObjectsInScene.add(new CBoidObject(this, new Point3D(0,0,0)));
 
 		// allObjectsInScene.add(new CBoidObject(this, new Point3D(0,1,0)));
