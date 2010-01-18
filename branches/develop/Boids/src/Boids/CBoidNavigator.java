@@ -23,13 +23,15 @@ public class CBoidNavigator {
 		// Initialize all navigation rules to start values
 		CBoidNavigatorRuleFlockCenter rule1 = new CBoidNavigatorRuleFlockCenter();
 		CBoidNavigatorRuleKeepDistance rule2 = new CBoidNavigatorRuleKeepDistance();
-		//CBoidNavigatorRuleAvoidCollision rule3 = new CBoidNavigatorRuleAvoidCollision();
+		CBoidNavigatorRuleAvoidCollision rule3 = new CBoidNavigatorRuleAvoidCollision();
+		CBoidNavigatorRuleAllignVelocity rule4 = new CBoidNavigatorRuleAllignVelocity();
 
 		rule1.init(boid, 1.0);
 		rule2.init(boid, 1.0);
-		//rule3.init(boid, 1.0);
+		rule3.init(boid, 1.0);
+		rule4.init(boid, 1.0);
 
-		Vector3D desiredDirection = null;
+		Vector3D desiredDirection = new Vector3D();
 
 		Vector<CSceneObject> interactingObjects = eye.perceive();
 
@@ -43,12 +45,20 @@ public class CBoidNavigator {
 				// boid, by scaling evaluation for each available rule				
 				rule1.evaluate(subject);
 				rule2.evaluate(subject);
-				//rule3.evaluate(subject);
+				rule3.evaluate(subject);
+				rule4.evaluate(subject);
 			}
 
 			// Get resulting forces from each rule and calculate resulting
 			// vector
-			desiredDirection = rule1.result().add(rule2.result());//.add(rule3.result());
+			
+			desiredDirection = rule1.result();
+			desiredDirection = desiredDirection.add(rule2.result());
+			desiredDirection = desiredDirection.add(rule3.result());
+			desiredDirection = desiredDirection.add(rule4.result());
+			
+			//desiredDirection.print();
+			
 		} else {
 			desiredDirection = new Vector3D(0, 0, 0);
 		}

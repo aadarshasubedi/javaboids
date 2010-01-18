@@ -76,6 +76,13 @@ public class Vector3D {
 				this.mZ * obj.mZ);
 	}
 	
+	public Vector3D Scalardivide(double divisor)
+	{
+		return new Vector3D(this.mX / divisor,
+				this.mY / divisor,
+				this.mZ / divisor);
+	}
+	
 	public double dotProduct(Vector3D obj)
 	{
 		return (obj.getX()*this.getX() +
