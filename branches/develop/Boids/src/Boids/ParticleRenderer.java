@@ -82,22 +82,52 @@ public class ParticleRenderer {
 
 	// Rotates to get local coordinate system setup
 	private void TransformBoidSpace(CBoidObject boid) {
-		// Rotate around z, to requested pitch
+
+		Vector3D heading = new Vector3D(boid.getHeading());
+
 		Vector3D x_axis = new Vector3D(1,0,0);
-		Vector3D xdisp = new Point3D(0,0,0).vector(new Point3D(boid.getHeading().getX(), 0, 0));
-		double angle_x = Math.acos(xdisp.dotProduct(x_axis));
 		
-		//gl.glRotated(boid.getPitch(), 1.0f, 0.0f, 0.0f);
-		gl.glRotated(angle_x, 1.0f, 0.0f, 0.0f);
+		// Rotation around Y
+		// Make direction vector with y component zeroed
+		// Check angle against x-axis (1,0,0)
+		if (heading.getX() == 0.0 && heading.getZ() == 0.0)
+		{
+			//System.out.print("Do Nothing\n");
+		}		
+		else
+		{	
+			heading = new Vector3D(boid.getHeading());
+			heading.setY(0);
+			heading.normalize();
+			heading.print();
 
-		Vector3D y_axis = new Vector3D(0,1,0);
-		Vector3D ydisp = new Point3D(0,0,0).vector(new Point3D(0, boid.getHeading().getY(), 0));
-		double angle_y = Math.acos(ydisp.dotProduct(y_axis));
-		// rotate around y, to requested (not defined)
-		gl.glRotated(angle_y, 0.0f, 1.0f, 0.0f);
+			double angle_y = Math.acos(heading.dotProduct(x_axis));
+			if(heading.getX() < 0) {angle_y = angle_y * -1;};
+			System.out.print("angle y= " + angle_y * (360/(2*Math.PI)) + "\n");
 
-		// rotate round x, to requested roll
-		//gl.glRotated(25.0f, 1.0f, 0.0f, 0.0f);
+//			// rotate around y, to requested (not defined)
+			gl.glRotated(angle_y * (360/(2*Math.PI)), 0.0f, 1.0f, 0.0f);
+		}
+
+		
+		if (heading.getX() == 0.0 && heading.getY() == 0.0)
+		{
+			//System.out.print("Do Nothing\n");
+		}	
+		else
+		{
+			heading = new Vector3D(boid.getHeading());
+			heading.setZ(0);
+			heading.normalize();			
+
+			double angle_z = Math.acos(heading.dotProduct(x_axis));
+			if (heading.getY() < 0 ||
+					heading.getX() < 0 ) { angle_z = angle_z * -1; };
+			
+			System.out.print("angle z = " + angle_z * (360/(2*Math.PI)) + "\n");
+			gl.glRotated(angle_z * (360/(2*Math.PI)), 0.0f, 0.0f, 1.0f);
+			
+		}
 	}
 
 	// Draw the boid as a simple triangle
@@ -172,7 +202,7 @@ public class ParticleRenderer {
 
 		
 		// if (otherPos == 0) {
-		glu.gluLookAt(0, 0, 8.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
+		glu.gluLookAt(0, 0, 12.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
 		// }
 		// else if (otherPos == 1)
 		// {
