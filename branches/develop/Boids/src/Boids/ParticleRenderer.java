@@ -102,7 +102,9 @@ public class ParticleRenderer {
 			heading.print();
 
 			double angle_y = Math.acos(heading.dotProduct(x_axis));
-			if(heading.getX() < 0) {angle_y = angle_y * -1;};
+			if(heading.getX() < 0 ||
+					heading.getZ() <0 ) {angle_y = angle_y * -1;};
+					
 			System.out.print("angle y= " + angle_y * (360/(2*Math.PI)) + "\n");
 
 //			// rotate around y, to requested (not defined)
@@ -120,13 +122,24 @@ public class ParticleRenderer {
 			heading.setZ(0);
 			heading.normalize();			
 
-			double angle_z = Math.acos(heading.dotProduct(x_axis));
+			double angle_z = Math.acos(heading.dotProduct(x_axis)) * (360/(2*Math.PI));
 			if (heading.getY() < 0 ||
 					heading.getX() < 0 ) { angle_z = angle_z * -1; };
 			
-			System.out.print("angle z = " + angle_z * (360/(2*Math.PI)) + "\n");
-			gl.glRotated(angle_z * (360/(2*Math.PI)), 0.0f, 0.0f, 1.0f);
-			
+					
+			if (Double.compare(angle_z, 90.0) > 0)
+			{
+				
+			}
+			if (Double.compare(angle_z, -90.0) < 0)
+			{
+				
+			}
+			else
+			{
+				System.out.print("angle z = " + angle_z + "\n");
+				gl.glRotated(angle_z , 0.0f, 0.0f, 1.0f);
+			}
 		}
 	}
 

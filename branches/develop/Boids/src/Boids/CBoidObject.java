@@ -14,7 +14,7 @@ public class CBoidObject extends CSceneObject implements ISceneObject {
 
 	private double mLastTime = 0;
 
-	private Vector3D heading = new Vector3D(0.5, 0, 0); // Direction boid flies
+	private Vector3D heading = new Vector3D(0, 0, 0.5); // Direction boid flies
 														// to
 	private Vector3D velocity = new Vector3D(); // Resulting vector of heading
 												// and speed
