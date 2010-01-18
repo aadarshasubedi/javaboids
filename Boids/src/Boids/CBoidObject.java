@@ -54,7 +54,7 @@ public class CBoidObject extends CSceneObject implements ISceneObject {
 
 	public void calculate() {
 		// Let navigation module calculate desired acceleration in scene
-		requestedAccel = navigator.calculate(this).scalarMultiply(maxAcceleration);
+		requestedAccel = navigator.calculate(this);
 		//requestedAccel.print();
 		// pilot.evaluate(this);
 

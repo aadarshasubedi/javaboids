@@ -99,13 +99,13 @@ public class ParticleRenderer {
 			heading = new Vector3D(boid.getHeading());
 			heading.setY(0);
 			heading.normalize();
-			heading.print();
+		//	heading.print();
 
 			double angle_y = Math.acos(heading.dotProduct(x_axis));
 			if(heading.getX() < 0 ||
 					heading.getZ() <0 ) {angle_y = angle_y * -1;};
 					
-			System.out.print("angle y= " + angle_y * (360/(2*Math.PI)) + "\n");
+	//		System.out.print("angle y= " + angle_y * (360/(2*Math.PI)) + "\n");
 
 //			// rotate around y, to requested (not defined)
 			gl.glRotated(angle_y * (360/(2*Math.PI)), 0.0f, 1.0f, 0.0f);
@@ -137,7 +137,7 @@ public class ParticleRenderer {
 			}
 			else
 			{
-				System.out.print("angle z = " + angle_z + "\n");
+		//		System.out.print("angle z = " + angle_z + "\n");
 				gl.glRotated(angle_z , 0.0f, 0.0f, 1.0f);
 			}
 		}
@@ -211,11 +211,11 @@ public class ParticleRenderer {
 		
 		gl.glMatrixMode(GL.GL_PROJECTION);
 		gl.glLoadIdentity();
-		glu.gluPerspective(55.0, 1.0, 1.0, 50.0);
+		glu.gluPerspective(65.0, 1.0, 1.0, 50.0);
 
 		
 		// if (otherPos == 0) {
-		glu.gluLookAt(0, 0, 12.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
+		glu.gluLookAt(0, 0, 40.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
 		// }
 		// else if (otherPos == 1)
 		// {

@@ -4,6 +4,8 @@ import VectorMath.*;
 
 public class CBoidPilot {
 	
+	private double MAX_ACCEL_SPEED = 10.0;
+	
 	public Point3D evaluate(CBoidObject boid, double deltaTime)
 	{
 		Vector3D desiredDirection = new Vector3D(boid.getRequestedAccel());
@@ -11,6 +13,9 @@ public class CBoidPilot {
 		
 		Vector3D velocityVect = new Vector3D(boid.getVelocity());
 		//System.out.print("Actual velocity: "); velocityVect.print();
+		
+		Vector3D stayInBoundary = StayInMovingSpace(boid.getLocationInScene());
+		desiredDirection = desiredDirection.add(stayInBoundary).scalarMultiply(MAX_ACCEL_SPEED);
 		
 		// Calculated displacement based on d = v*t + 0.5at^2
 		Vector3D accelPart = desiredDirection.scalarMultiply(0.5*deltaTime*deltaTime);
@@ -34,4 +39,60 @@ public class CBoidPilot {
 		
 		return newPos;
 	};
+	
+	private Vector3D StayInMovingSpace(Point3D testPos)
+	{
+		// Check if the current location of the boid is not reaching one
+		// of the boundary planes of moving space
+		// When position is already outside, do nothing and assume this is an entering boid
+		// Other wise test and return 'accelerate away' vector if necessary
+		
+		double backplaneZ 	= 20;
+		double fronplaneZ 	= -2;
+		double leftPlaneX 	= -15;
+		double rightPlaneX 	= 15;
+		double topPlaneY 	= 15;
+		double bottomplaneY = -15;
+		
+		double posX = testPos.getX();
+		double posY = testPos.getY();
+		double posZ = testPos.getZ();
+		
+		Vector3D moveAway = new Vector3D();
+		//testPos.print();
+		
+		if (Double.compare(backplaneZ, posZ) < 0)
+		{	
+			moveAway.setZ(-1);
+		}
+		
+		if (Double.compare(fronplaneZ, posZ) > 0)
+		{
+			moveAway.setZ(1);
+		}
+		
+		if (Double.compare(rightPlaneX, posX) < 0)
+		{
+			moveAway.setX(-1);
+		}
+		
+		if (Double.compare(leftPlaneX, posX) > 0)
+		{
+			moveAway.setX(1);
+		}
+		
+		if (Double.compare(topPlaneY, posY) < 0)
+		{
+			moveAway.setY(-1);
+		}
+		
+		if (Double.compare(bottomplaneY, posY) > 0)
+		{
+			moveAway.setY(1);
+		}
+		
+		//moveAway.print();
+		return moveAway;
+		
+	}
 }
