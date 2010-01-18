@@ -4,7 +4,7 @@ import VectorMath.*;
 
 public class CBoidPilot {
 	
-	private double MAX_ACCEL_SPEED = 10.0;
+	private double MAX_ACCEL_SPEED = 30.0;
 	
 	public Point3D evaluate(CBoidObject boid, double deltaTime)
 	{
@@ -24,7 +24,7 @@ public class CBoidPilot {
 		// Calculate new velocity v = v + at
 		velocityVect = velocityVect.add(desiredDirection.scalarMultiply(deltaTime));
 		
-		double maxSpeed = 3.0;
+		double maxSpeed = 10.0;
 		if (velocityVect.length() > maxSpeed)
 		{
 			velocityVect = velocityVect.normalize().scalarMultiply(maxSpeed);
