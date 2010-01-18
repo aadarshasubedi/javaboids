@@ -23,11 +23,11 @@ public class CBoidNavigator {
 		// Initialize all navigation rules to start values
 		CBoidNavigatorRuleFlockCenter rule1 = new CBoidNavigatorRuleFlockCenter();
 		CBoidNavigatorRuleKeepDistance rule2 = new CBoidNavigatorRuleKeepDistance();
-		CBoidNavigatorRuleAvoidCollision rule3 = new CBoidNavigatorRuleAvoidCollision();
+		//CBoidNavigatorRuleAvoidCollision rule3 = new CBoidNavigatorRuleAvoidCollision();
 
 		rule1.init(boid, 1.0);
 		rule2.init(boid, 1.0);
-		rule3.init(boid, 1.0);
+		//rule3.init(boid, 1.0);
 
 		Vector3D desiredDirection = null;
 
@@ -42,13 +42,13 @@ public class CBoidNavigator {
 				// evaluate specific object out of scene against this
 				// boid, by scaling evaluation for each available rule				
 				rule1.evaluate(subject);
-				//rule2.evaluate(subject);
+				rule2.evaluate(subject);
 				//rule3.evaluate(subject);
 			}
 
 			// Get resulting forces from each rule and calculate resulting
 			// vector
-			desiredDirection = rule1.result().add(rule2.result()).add(rule3.result());
+			desiredDirection = rule1.result().add(rule2.result());//.add(rule3.result());
 		} else {
 			desiredDirection = new Vector3D(0, 0, 0);
 		}
