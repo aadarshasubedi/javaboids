@@ -37,7 +37,7 @@ public class BoidUI {
 	private JMenuItem copyMenuItem = null;
 	private JMenuItem pasteMenuItem = null;
 	private JMenuItem saveMenuItem = null;
-	private JDialog aboutDialog = null;  //  @jve:decl-index=0:visual-constraint="1028,605"
+	private JDialog aboutDialog = null;  //  @jve:decl-index=0:visual-constraint="1024,582"
 	private JPanel aboutContentPane = null;
 	private JLabel aboutVersionLabel = null;
 	private JPanel pnlBoidControl = null;
@@ -64,6 +64,7 @@ public class BoidUI {
 	private JCheckBox chkRuleMoveToAtrractionPnt = null;
 	private JTextField edtAttractionPoint = null;
 	private JLabel jLabel3 = null;
+	private JPanel pnlOpenGL = null;
 	/**
 	 * This method initializes jFrame
 	 * 
@@ -91,6 +92,7 @@ public class BoidUI {
 			jContentPane = new JPanel();
 			jContentPane.setLayout(null);
 			jContentPane.add(getPnlBoidControl(), null);
+			jContentPane.add(getPnlOpenGL(), null);
 		}
 		return jContentPane;
 	}
@@ -580,6 +582,20 @@ public class BoidUI {
 			edtAttractionPoint.setBounds(new Rectangle(165, 210, 46, 20));
 		}
 		return edtAttractionPoint;
+	}
+
+	/**
+	 * This method initializes pnlOpenGL	
+	 * 	
+	 * @return javax.swing.JPanel	
+	 */
+	private JPanel getPnlOpenGL() {
+		if (pnlOpenGL == null) {
+			pnlOpenGL = new JPanel();
+			pnlOpenGL.setLayout(new GridBagLayout());
+			pnlOpenGL.setBounds(new Rectangle(0, 0, 736, 571));
+		}
+		return pnlOpenGL;
 	}
 
 	/**
