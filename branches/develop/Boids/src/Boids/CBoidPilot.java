@@ -4,7 +4,7 @@ import VectorMath.*;
 
 public class CBoidPilot {
 	
-	private double MAX_ACCEL_SPEED = 30.0;
+	private double MAX_ACCEL_SPEED = 120.0;
 	
 	public Point3D evaluate(CBoidObject boid, double deltaTime)
 	{
@@ -47,12 +47,12 @@ public class CBoidPilot {
 		// When position is already outside, do nothing and assume this is an entering boid
 		// Other wise test and return 'accelerate away' vector if necessary
 		
-		double backplaneZ 	= 20;
+		double backplaneZ 	= 30;
 		double fronplaneZ 	= -2;
-		double leftPlaneX 	= -15;
-		double rightPlaneX 	= 15;
-		double topPlaneY 	= 15;
-		double bottomplaneY = -15;
+		double leftPlaneX 	= -30;
+		double rightPlaneX 	= 30;
+		double topPlaneY 	= 30;
+		double bottomplaneY = -30;
 		
 		double posX = testPos.getX();
 		double posY = testPos.getY();

@@ -48,10 +48,10 @@ public class CBoidNavigatorRuleFlockCenter extends CBoidNavigatorRule
 		Vector3D direction = new Vector3D(boidPos.vector(mFlockCentroid));
 		double distance = boidPos.distance(mFlockCentroid);
 		
-	//	if (distance > 5.0)
+		//if (distance < 10.0)
 		{
 			forceVector = direction;
-			forceVector = direction.scalarMultiply(0.2);
+			//forceVector = direction.scalarMultiply(0.2);
 		}
 		
 		//System.out.print("Going to Center: "); forceVector.print();
