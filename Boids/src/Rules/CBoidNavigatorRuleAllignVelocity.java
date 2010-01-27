@@ -18,9 +18,10 @@ public class CBoidNavigatorRuleAllignVelocity extends CBoidNavigatorRule
 	{
 		// The goal is to have all boids moving in the same direction
 		// giving a nice smooth movement.
-		//if (mEvaluatedNrOfBoids < 6)
+		if (mEvaluatedNrOfBoids < 2)
 		{
 			mEvaluatedNrOfBoids++;
+			//totalAllignment = totalAllignment.add(object.getVelocity().normalize());
 			totalAllignment = totalAllignment.add(object.getVelocity());
 		}
 	}
@@ -38,7 +39,7 @@ public class CBoidNavigatorRuleAllignVelocity extends CBoidNavigatorRule
 	public Vector3D result() {
 
 		Vector3D result = new Vector3D();
-		
+		result = totalAllignment;
 		if (mEvaluatedNrOfBoids>0)
 		{
 			result = totalAllignment.Scalardivide(mEvaluatedNrOfBoids);

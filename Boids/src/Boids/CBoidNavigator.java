@@ -14,6 +14,9 @@ public class CBoidNavigator {
 	private CBoidEye eye = null; // Responsible for creating a list of
 									// visible objects in the boid's world.
 
+	private int countForFun = 0;
+	private boolean switsj = false;
+	
 	public CBoidNavigator(CBoidEye boidEye) {
 		this.eye = boidEye;
 		navigationRules.add(new CBoidNavigatorRuleFlockCenter());
@@ -27,14 +30,16 @@ public class CBoidNavigator {
 		CBoidNavigatorRuleAllignVelocity rule4 = new CBoidNavigatorRuleAllignVelocity();
 
 		rule1.init(boid, 1.0);
-		rule2.init(boid, 1.0);
+		rule2.init(boid, 1.0); //0.7
 		rule3.init(boid, 1.0);
-		rule4.init(boid, 1.0);
+		rule4.init(boid, 1.0);  //0.5
 
 		Vector3D desiredDirection = new Vector3D();
 
 		Vector<CSceneObject> interactingObjects = eye.perceive();
 
+		//System.out.print(interactingObjects.size()+"\n");
+		
 		if (interactingObjects.size() != 0) {
 			Iterator<CSceneObject> it = interactingObjects.iterator();
 
@@ -53,11 +58,35 @@ public class CBoidNavigator {
 			// vector
 			
 			desiredDirection = rule1.result();
+			//System.out.print(rule4.result().length() + "\n");
+			
 			desiredDirection = desiredDirection.add(rule2.result());
 			desiredDirection = desiredDirection.add(rule3.result());
 			desiredDirection = desiredDirection.add(rule4.result());
 			
 			//desiredDirection.print();
+			// force to middle
+			countForFun++;
+			Vector3D dir = new Vector3D();
+			if (countForFun % 300 == 0)
+			{
+				if (switsj) { switsj = false; } else {switsj = true;}				
+			}
+			
+			if (switsj)
+			{
+				dir = boid.getLocationInScene().vector(new Point3D(-8*Math.random(),
+						-8*Math.random(),
+						-8*Math.random()));
+			}
+			else
+			{
+				//dir = boid.getLocationInScene().vector(new Point3D(8,8,8));
+				dir = new Vector3D(0,0,0);
+			}
+			
+			dir.print();
+			desiredDirection = desiredDirection.add(dir);
 			
 		} else {
 			desiredDirection = new Vector3D(0, 0, 0);

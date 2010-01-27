@@ -9,7 +9,7 @@ public class CBoidObject extends CSceneObject implements ISceneObject {
 	private double maxAcceleration = 120;
 
 	private double mAccel = 0;
-	private double mSpeed = 40;
+	private double mSpeed = 20;
 	private double mRoll = 15;
 
 	private double mLastTime = 0;
