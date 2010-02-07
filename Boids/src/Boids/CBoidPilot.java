@@ -5,6 +5,7 @@ import VectorMath.*;
 public class CBoidPilot {
 	
 	private double MAX_ACCEL_SPEED = 120.0;
+	private double MAX_SPEED = 10.0;
 	
 	public Point3D evaluate(CBoidObject boid, double deltaTime)
 	{
@@ -15,7 +16,7 @@ public class CBoidPilot {
 		//System.out.print("Actual velocity: "); velocityVect.print();
 		
 		Vector3D stayInBoundary = StayInMovingSpace(boid.getLocationInScene());
-		desiredDirection = desiredDirection.add(stayInBoundary).scalarMultiply(MAX_ACCEL_SPEED);
+		desiredDirection = desiredDirection.add(stayInBoundary).normalize().scalarMultiply(MAX_ACCEL_SPEED);
 		
 		// Calculated displacement based on d = v*t + 0.5at^2
 		Vector3D accelPart = desiredDirection.scalarMultiply(0.5*deltaTime*deltaTime);
@@ -24,7 +25,7 @@ public class CBoidPilot {
 		// Calculate new velocity v = v + at
 		velocityVect = velocityVect.add(desiredDirection.scalarMultiply(deltaTime));
 		
-		double maxSpeed = 10.0;
+		double maxSpeed = MAX_SPEED;
 		if (velocityVect.length() > maxSpeed)
 		{
 			velocityVect = velocityVect.normalize().scalarMultiply(maxSpeed);
@@ -47,12 +48,12 @@ public class CBoidPilot {
 		// When position is already outside, do nothing and assume this is an entering boid
 		// Other wise test and return 'accelerate away' vector if necessary
 		
-		double backplaneZ 	= 30;
-		double fronplaneZ 	= -2;
-		double leftPlaneX 	= -30;
-		double rightPlaneX 	= 30;
-		double topPlaneY 	= 30;
-		double bottomplaneY = -30;
+		double backplaneZ 	= 10;
+		double fronplaneZ 	= 0; //-2
+		double leftPlaneX 	= -20;
+		double rightPlaneX 	= 20;
+		double topPlaneY 	= 20;
+		double bottomplaneY = -20;
 		
 		double posX = testPos.getX();
 		double posY = testPos.getY();

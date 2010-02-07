@@ -99,13 +99,11 @@ public class ParticleRenderer {
 			heading = new Vector3D(boid.getHeading());
 			heading.setY(0);
 			heading.normalize();
-		//	heading.print();
 
 			double angle_y = Math.acos(heading.dotProduct(x_axis));
+			
 			if(heading.getX() < 0 ||
-					heading.getZ() <0 ) {angle_y = angle_y * -1;};
-					
-	//		System.out.print("angle y= " + angle_y * (360/(2*Math.PI)) + "\n");
+					heading.getZ() <0 ) {angle_y = angle_y * -1;};	
 
 //			// rotate around y, to requested (not defined)
 			gl.glRotated(angle_y * (360/(2*Math.PI)), 0.0f, 1.0f, 0.0f);
@@ -150,29 +148,10 @@ public class ParticleRenderer {
 		gl.glColor3f(1.0f,0.0f,0.0f);
 		//glut.glutSolidCube(0.25f);
 		gl.glRotatef(90.0f, 0, 1, 0);
-		glut.glutSolidCone(0.25f, 1.0f, 10, 10);
+		glut.glutSolidCone(0.25f, 1.5f, 10, 10);
 		gl.glPopMatrix();
 		
-//		gl.glBegin(GL.GL_TRIANGLES);
-//		
-//		gl.glColor3f(1.0f, 0.0f, 0.0f);
-//		gl.glVertex3f(-0.50f, 0.0f, -0.50f);
-//		gl.glColor3f(0.0f, 0.0f, 1.0f);
-//		gl.glVertex3f(0.50f, 0.0f, -0.50f);
-//		gl.glColor3f(0.0f, 1.0f, 0.0f);
-//		gl.glVertex3f(0.0f, 0.0f, 0.0f);
-//		
-//		gl.glColor3f(1.0f, 0.0f, 0.0f);
-//		gl.glVertex3f(-0.50f, 0.0f, 0.50f);
-//		gl.glColor3f(0.0f, 0.0f, 1.0f);
-//		gl.glVertex3f(0.50f, 0.0f, 0.50f);
-//		gl.glColor3f(0.0f, 1.0f, 0.0f);
-//		gl.glVertex3f(0.0f, 0.0f, 0.0f);
-//		
-//		gl.glEnd();
-		
 		gl.glColor3f(1.0f,0.0f,0.0f);
-		//glut.glutSolidCube(0.25f);
 	}
 
 	protected void SetMaterial() {
@@ -211,7 +190,7 @@ public class ParticleRenderer {
 		
 		gl.glMatrixMode(GL.GL_PROJECTION);
 		gl.glLoadIdentity();
-		glu.gluPerspective(65.0, 1.0, 1.0, 50.0);
+		glu.gluPerspective(70.0, 1.0, 1.0, 60.0);
 
 		
 		// if (otherPos == 0) {

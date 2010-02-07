@@ -5,10 +5,7 @@ import VectorMath.Vector3D;
 import Interface.ISceneObject;
 
 public class CBoidObject extends CSceneObject implements ISceneObject {
-
-	private double maxAcceleration = 120;
-
-	private double mAccel = 0;
+	
 	private double mSpeed = 20;
 	private double mRoll = 15;
 
@@ -22,8 +19,7 @@ public class CBoidObject extends CSceneObject implements ISceneObject {
 	private Vector3D requestedAccel = new Vector3D(); // Acceleration desired
 														// by navigator module
 
-	private Point3D position = new Point3D(0, 0, 0);
-	private Point3D updatedPosition = new Point3D(0, 0, 0);
+	private Point3D position = new Point3D(0, 0, 0);	
 
 	private CBoidNavigator navigator = null;
 	private CBoidEye eye = null;
