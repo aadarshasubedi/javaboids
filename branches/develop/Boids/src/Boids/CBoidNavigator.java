@@ -24,15 +24,15 @@ public class CBoidNavigator {
 
 	public Vector3D calculate(CBoidObject boid) {
 		// Initialize all navigation rules to start values
-		CBoidNavigatorRuleFlockCenter rule1 = new CBoidNavigatorRuleFlockCenter();
+		CBoidNavigatorRuleAvoidCollision rule1 = new CBoidNavigatorRuleAvoidCollision();
 		CBoidNavigatorRuleKeepDistance rule2 = new CBoidNavigatorRuleKeepDistance();
-		CBoidNavigatorRuleAvoidCollision rule3 = new CBoidNavigatorRuleAvoidCollision();
+		CBoidNavigatorRuleFlockCenter rule3 = new CBoidNavigatorRuleFlockCenter();
 		CBoidNavigatorRuleAllignVelocity rule4 = new CBoidNavigatorRuleAllignVelocity();
 
-		rule1.init(boid, 1.0);
-		rule2.init(boid, 1.0); //0.7
+		rule1.init(boid, 0.5);
+		rule2.init(boid, 1.0); 
 		rule3.init(boid, 1.0);
-		rule4.init(boid, 1.0);  //0.5
+		rule4.init(boid, 0.7); 
 
 		Vector3D desiredDirection = new Vector3D();
 
@@ -54,21 +54,34 @@ public class CBoidNavigator {
 				rule4.evaluate(subject);
 			}
 
+			double MAX_ACCEL = 120.0;
 			// Get resulting forces from each rule and calculate resulting
 			// vector
 			
 			desiredDirection = rule1.result();
-			//System.out.print(rule4.result().length() + "\n");
 			
-			desiredDirection = desiredDirection.add(rule2.result());
-			desiredDirection = desiredDirection.add(rule3.result());
-			desiredDirection = desiredDirection.add(rule4.result());
+			if (Double.compare(desiredDirection.length(),MAX_ACCEL) < 0)
+			{
+				desiredDirection = desiredDirection.add(rule2.result());
+			}
+			
+			if (Double.compare(desiredDirection.length(),MAX_ACCEL) < 0)
+			{
+				desiredDirection = desiredDirection.add(rule3.result());
+			}
+			
+			if (Double.compare(desiredDirection.length(),MAX_ACCEL) < 0)
+			{
+				desiredDirection = desiredDirection.add(rule4.result());				
+			}
+			
+			//System.out.print(desiredDirection.length());
 			
 			//desiredDirection.print();
 			// force to middle
 			countForFun++;
 			Vector3D dir = new Vector3D();
-			if (countForFun % 300 == 0)
+			if (countForFun % 150 == 0)
 			{
 				if (switsj) { switsj = false; } else {switsj = true;}				
 			}
@@ -85,17 +98,17 @@ public class CBoidNavigator {
 				dir = new Vector3D(0,0,0);
 			}
 			
-			dir.print();
+			//dir.print();
 			desiredDirection = desiredDirection.add(dir);
 			
 		} else {
 			desiredDirection = new Vector3D(0, 0, 0);
 		}
 		
-		if (desiredDirection.length() > 1.0)
-		{
-			desiredDirection = desiredDirection.normalize();
-		}
+//		if (desiredDirection.length() > 1.0)
+//		{
+//			desiredDirection = desiredDirection.normalize();
+//		}
 
 		return desiredDirection;
 	}
